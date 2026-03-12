@@ -61,23 +61,6 @@ results = download_data(request)
   Meaning:
   - per-dataset script options
 
-## Capability Model
-
-Each dataset declares:
-
-- `time_mode`
-  - `none`
-  - `range`
-  - `year`
-  - `recent_window`
-
-- `aoi_mode`
-  - `unsupported`
-  - `native`
-  - `postfilter`
-
-This is more accurate than pretending every downloader supports identical query semantics.
-
 ## Output
 
 `download_data(request)` returns a list of structured records:
