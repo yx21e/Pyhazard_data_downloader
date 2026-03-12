@@ -27,23 +27,23 @@ results = download_data(request)
 
 - `datasets: list[str]`
   Supported values:
-  - `canopy_cover`
-  - `current_perimeters`
-  - `goes_geocolor`
-  - `historical_fires`
-  - `hpwren_real_time_weather_stations`
-  - `nasa_gibs`
-  - `nohrsc_snow_analysis`
-  - `satellite_fire_detections_goes`
-  - `satellite_fire_detections_modis`
-  - `satellite_fire_detections_viirs`
-  - `smoke_analysis`
-  - `spot_forecast`
-  - `surface_fuels`
-  - `vegetation_type`
-  - `watches_and_warnings`
-  - `weather_forecast`
-  - `wrc_housing_density`
+  - `canopy_cover`: LANDFIRE canopy cover raster
+  - `current_perimeters`: current WFIGS fire perimeter snapshot
+  - `goes_geocolor`: GOES GeoColor source imagery files
+  - `historical_fires`: historical fire perimeter archives
+  - `hpwren_real_time_weather_stations`: HPWREN station metadata and recent samples
+  - `nasa_gibs`: NASA GIBS global imagery layers
+  - `nohrsc_snow_analysis`: NOHRSC daily snow analysis archives
+  - `satellite_fire_detections_goes`: GOES fire detection files
+  - `satellite_fire_detections_modis`: FIRMS MODIS fire detection CSV
+  - `satellite_fire_detections_viirs`: FIRMS VIIRS fire detection CSV
+  - `smoke_analysis`: HMS annual smoke polygon bundle
+  - `spot_forecast`: current and recent spot forecast products
+  - `surface_fuels`: LANDFIRE surface fuels raster
+  - `vegetation_type`: LANDFIRE vegetation type raster
+  - `watches_and_warnings`: NDFD watches and warnings files
+  - `weather_forecast`: NDFD and HRRR forecast files
+  - `wrc_housing_density`: WRC housing density raster
 
 - `temporal_window: tuple[str, str] | None`
   Format:
