@@ -14,7 +14,7 @@ from pathlib import Path
 import requests
 
 # ===== USER SETTINGS =====
-OUTPUT_DIR = "/home/runyang/ryang/WFIGS_Perimeters/current"
+OUTPUT_DIR = "./downloads/wfigs_current"
 SERVICE_ROOT = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Interagency_Perimeters_Current/FeatureServer/0"
 
 

@@ -33,8 +33,8 @@ HRRR_CYCLES = [
     for item in os.environ.get("HRRR_CYCLES", "00,06,12,18").replace(" ", ",").split(",")
     if item.strip()
 ]
-NDFD_DIR = "/home/runyang/ryang/NDFD"
-HRRR_DIR = "/home/runyang/ryang/HRRR"
+NDFD_DIR = "./downloads/ndfd"
+HRRR_DIR = "./downloads/hrrr"
 RETRY_MAX = int(os.environ.get("FORECAST_RETRY_MAX", "5"))
 RETRY_DELAY = int(os.environ.get("FORECAST_RETRY_DELAY", "5"))
 

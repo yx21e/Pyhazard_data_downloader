@@ -2,6 +2,11 @@
 
 Unified client-facing downloader for multi-source hazard and environmental datasets.
 
+The repository now has two compatible entry points:
+
+- The original script-backed downloader for operational hazard products such as FIRMS fire detections, WFIGS perimeters, GIBS imagery, NDFD/HRRR weather, HMS smoke, LANDFIRE layers, and WRC housing density.
+- A provider-catalog downloader for raw data sources used in foundation-model and general hazard-model workflows, including HRRR, FIRMS, LANDFIRE, AQS PM2.5, HMS smoke, IBTrACS, HURDAT2, USDM, WFIGS, MTBS, MERRA-2, WRC housing, and LandScan.
+
 ## Main API
 
 ```python
@@ -13,7 +18,7 @@ request = DownloadRequest(
     datasets=["satellite_fire_detections_viirs", "nasa_gibs", "current_perimeters"],
     temporal_window=("2024-01-01", "2024-01-01"),
     area_of_interest_bbox=(-125.0, 24.0, -66.0, 50.0),
-    output_root="/home/yangshuang/output/downloader_example",
+    output_root="./downloads_example",
     extra_options={
         "nasa_gibs": {"layers": "MODIS_Terra_CorrectedReflectance_TrueColor"},
         "satellite_fire_detections_viirs": {"day_range": 1},
@@ -22,6 +27,44 @@ request = DownloadRequest(
 
 results = download_data(request)
 ```
+
+## Provider-Catalog API
+
+Use this path when you want raw provider files and manifests for model-building workflows:
+
+```python
+from downloader import ProviderDownloadRequest, download_provider_data, list_provider_datasets
+
+request = ProviderDownloadRequest(
+    datasets=["aqs_pm25", "hms_smoke", "ibtracs"],
+    output_root="./downloads_demo",
+    years=(2024, 2024),
+    dry_run=True,
+    max_files=2,
+)
+results = download_provider_data(request)
+```
+
+List provider-catalog datasets:
+
+```bash
+python3 -m downloader.provider_cli --list
+```
+
+Dry-run a request:
+
+```bash
+python3 -m downloader.provider_cli \
+  --datasets aqs_pm25 hms_smoke ibtracs \
+  --output-root ./downloads_demo \
+  --start-year 2024 \
+  --end-year 2024 \
+  --dry-run \
+  --max-files 3
+```
+
+See `downloader/PROVIDER_DATASETS.md` for source coverage, credential notes,
+and the boundary between raw downloads and model-ready dataloaders.
 
 ## `DownloadRequest` Parameters
 
@@ -84,6 +127,8 @@ results = download_data(request)
   - raw downloader scripts
 - `example_downloader_client.py`
   - minimal client example
+- `example_provider_downloader_client.py`
+  - minimal provider-catalog downloader example
 - `verify_downloader_readiness.py`
   - batch verification entrypoint
 

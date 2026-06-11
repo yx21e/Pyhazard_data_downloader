@@ -17,7 +17,7 @@ import requests
 
 # ===== USER SETTINGS =====
 YEAR = os.environ.get("HMS_YEAR", "2024")
-OUTPUT_DIR = "/home/runyang/ryang/HMS_Smoke"
+OUTPUT_DIR = "./downloads/hms_smoke"
 BASE_URL = "https://satepsanone.nesdis.noaa.gov/pub/FIRE/web/HMS/Smoke_Polygons/Shapefile/Annual_Bundles"
 
 

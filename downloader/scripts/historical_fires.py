@@ -23,7 +23,7 @@ import requests
 # ===== USER SETTINGS =====
 START_DATE = os.environ.get("WFIGS_START_DATE", "2024-01-01")
 END_DATE = os.environ.get("WFIGS_END_DATE", "2024-12-31")
-ROOT = Path(os.environ.get("HISTORICAL_FIRES_OUTPUT_ROOT", "/home/runyang/ryang"))
+ROOT = Path(os.environ.get("HISTORICAL_FIRES_OUTPUT_ROOT", "./downloads/historical_fires"))
 FRAP_URL = "https://gis.data.cnra.ca.gov/api/download/v1/items/c3c10388e3b24cec8a954ba10458039d/shapefile?layers=0"
 GEOMAC_URLS = {
     "Historic_Geomac_Perimeters_All_Years_2000_2018": "https://www.arcgis.com/sharing/rest/content/items/5b3ff19978be49208d41a9d9a461ecfb/data",

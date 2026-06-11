@@ -25,7 +25,7 @@ BUCKETS = {
     "G16": "noaa-goes16",
     "G18": "noaa-goes18",
 }
-OUTPUT_ROOT = Path(os.environ.get("GOES_FDCF_OUTPUT_ROOT", "/home/runyang/ryang"))
+OUTPUT_ROOT = Path(os.environ.get("GOES_FDCF_OUTPUT_ROOT", "./downloads/historical_fires"))
 RETRY_MAX = int(os.environ.get("GOES_FDCF_RETRY_MAX", "5"))
 RETRY_DELAY = int(os.environ.get("GOES_FDCF_RETRY_DELAY", "5"))
 

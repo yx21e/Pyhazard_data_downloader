@@ -18,7 +18,7 @@ import requests
 # ===== USER SETTINGS =====
 LOCATIONS = os.environ.get("SPOT_LOCATIONS", "")
 MAX_PRODUCTS = int(os.environ.get("SPOT_MAX_PRODUCTS", "0"))
-OUTPUT_DIR = "/home/runyang/ryang/Spot_Forecast_Current"
+OUTPUT_DIR = "./downloads/spot_forecast"
 BASE_URL = "https://api.weather.gov"
 
 

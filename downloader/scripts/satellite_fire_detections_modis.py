@@ -11,7 +11,7 @@ import requests
 DEFAULT_MAP_KEY = os.environ.get('FIRMS_MAP_KEY', '64a36c46abb869a7c6a52f470bf0f6af')
 DEFAULT_AREA = os.environ.get('FIRMS_AREA', '-125,24,-66,50')
 BASE_URL = 'https://firms.modaps.eosdis.nasa.gov/api/area/csv'
-OUTPUT_DIR = Path(os.environ.get('FIRMS_OUTPUT_DIR', '/home/runyang/ryang/firms'))
+OUTPUT_DIR = Path(os.environ.get('FIRMS_OUTPUT_DIR', './downloads/firms'))
 SOURCES = {
     'MODIS_SP': 'MODIS_SP',
     'MODIS_URT_NRT': 'MODIS_NRT',

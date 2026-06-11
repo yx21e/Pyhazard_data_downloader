@@ -21,7 +21,7 @@ START_DATE = os.environ.get("GOES_START_DATE", "2024-01-01")
 END_DATE = os.environ.get("GOES_END_DATE", "2024-12-31")
 HOUR = os.environ.get("GOES_HOUR", "18")
 SATS = os.environ.get("GOES_SATS", "G16,G18")
-OUTPUT_DIR = "/home/runyang/ryang/GOES_MCMIPC_2024"
+OUTPUT_DIR = "./downloads/goes_geocolor"
 PRODUCT = "ABI-L2-MCMIPC"
 BUCKETS = {
     "G16": "noaa-goes16",

@@ -17,7 +17,7 @@ import requests
 
 # ===== USER SETTINGS =====
 VERSION = os.environ.get("LANDFIRE_FBFM40_VERSION", "LF2024")
-OUTPUT_DIR = "/home/runyang/ryang/LANDFIRE_FUELS_2024/FBFM40"
+OUTPUT_DIR = "./downloads/landfire_surface_fuels"
 URLS = {
     "LF2024": "https://landfire.gov/data-downloads/CONUS_LF2024/LF2024_FBFM40_CONUS.zip",
 }

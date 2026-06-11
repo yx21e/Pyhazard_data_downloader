@@ -22,7 +22,7 @@ LAYERS = os.environ.get(
     "GIBS_LAYERS",
     "MODIS_Terra_CorrectedReflectance_TrueColor,VIIRS_SNPP_CorrectedReflectance_TrueColor",
 )
-OUTPUT_DIR = "/home/runyang/ryang/NASA_GIBS_2024"
+OUTPUT_DIR = "./downloads/nasa_gibs"
 WMS_CAPS = "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?request=GetCapabilities&service=WMS"
 WMTS_CAPS = "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml"
 

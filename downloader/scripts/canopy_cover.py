@@ -16,7 +16,7 @@ import requests
 
 # ===== USER SETTINGS =====
 VERSION = os.environ.get("LANDFIRE_CC_VERSION", "LF2024")
-OUTPUT_DIR = "/home/runyang/ryang/LANDFIRE_FUELS_2024/CC"
+OUTPUT_DIR = "./downloads/landfire_canopy_cover"
 URLS = {
     "LF2024": "https://landfire.gov/data-downloads/CONUS_LF2024/LF2024_CC_CONUS.zip",
 }

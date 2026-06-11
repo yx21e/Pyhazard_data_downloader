@@ -19,7 +19,7 @@ from pathlib import Path
 # ===== USER SETTINGS =====
 START_DATE = os.environ.get("NDFD_START_DATE", "2024-01-01")
 END_DATE = os.environ.get("NDFD_END_DATE", "2024-12-31")
-OUTPUT_DIR = "/home/runyang/ryang/NDFD"
+OUTPUT_DIR = "./downloads/ndfd"
 RETRY_MAX = int(os.environ.get("NDFD_RETRY_MAX", "5"))
 RETRY_DELAY = int(os.environ.get("NDFD_RETRY_DELAY", "5"))
 VARIABLE = "wwa"

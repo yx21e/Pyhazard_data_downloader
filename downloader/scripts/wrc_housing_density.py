@@ -18,7 +18,7 @@ import requests
 
 # ===== USER SETTINGS =====
 URL = os.environ.get("WRC_HOUSING_URL", "https://usfs-public.box.com/shared/static/g9v52r7m228jw3ue741hf9qa539vf738.zip")
-OUTPUT_DIR = "/home/runyang/ryang/WRC_Housing_Density"
+OUTPUT_DIR = "./downloads/wrc_housing_density"
 ZIP_NAME = "HUDen_CONUS.zip"
 
 

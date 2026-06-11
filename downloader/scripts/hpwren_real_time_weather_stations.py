@@ -21,7 +21,7 @@ urllib3.disable_warnings()
 
 # ===== USER SETTINGS =====
 RECENT_DAYS = float(os.environ.get("HPWREN_RECENT_DAYS", "1"))
-OUTPUT_DIR = "/home/runyang/ryang/HPWREN_Weather"
+OUTPUT_DIR = "./downloads/hpwren_real_time_weather_stations"
 SITES_JS_URL = "https://www.hpwren.ucsd.edu/cameras/sites.js"
 REALTIME_URL = "https://cdn.hpwren.ucsd.edu/RT/wxtcf.json"
 HISTORY_URL = "https://x73i7ddjsldppoannzahvrqmqy0vgflz.lambda-url.us-west-2.on.aws/"

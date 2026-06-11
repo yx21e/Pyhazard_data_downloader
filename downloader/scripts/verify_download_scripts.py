@@ -7,26 +7,26 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path("/home/yangshuang/download_scripts")
-OUT_ROOT = Path("/home/yangshuang/output/download_script_checks")
+ROOT = Path(__file__).resolve().parent
+OUT_ROOT = Path(os.environ.get("PYHAZARD_DOWNLOAD_CHECK_ROOT", "./downloads/download_script_checks"))
 OUT_ROOT.mkdir(parents=True, exist_ok=True)
 
 
 CASES = [
     {
         "name": "canopy_cover",
-        "cmd": ["python", "canopy_cover.py", "--version", "LF2024", "--output-dir", str(OUT_ROOT / "canopy_cover")],
+        "cmd": [sys.executable, "canopy_cover.py", "--version", "LF2024", "--output-dir", str(OUT_ROOT / "canopy_cover")],
         "timeout": 300,
     },
     {
         "name": "current_perimeters",
-        "cmd": ["python", "current_perimeters.py", "--output-dir", str(OUT_ROOT / "current_perimeters")],
+        "cmd": [sys.executable, "current_perimeters.py", "--output-dir", str(OUT_ROOT / "current_perimeters")],
         "timeout": 180,
     },
     {
         "name": "goes_geocolor",
         "cmd": [
-            "python",
+            sys.executable,
             "goes_geocolor.py",
             "--start-date",
             "2024-01-01",
@@ -44,7 +44,7 @@ CASES = [
     {
         "name": "historical_fires",
         "cmd": [
-            "python",
+            sys.executable,
             "historical_fires.py",
             "--start-date",
             "2024-07-01",
@@ -60,7 +60,7 @@ CASES = [
     {
         "name": "hpwren_real_time_weather_stations",
         "cmd": [
-            "python",
+            sys.executable,
             "hpwren_real_time_weather_stations.py",
             "--recent-days",
             "0.02",
@@ -72,7 +72,7 @@ CASES = [
     {
         "name": "nasa_gibs",
         "cmd": [
-            "python",
+            sys.executable,
             "nasa_gibs.py",
             "--start-date",
             "2024-01-01",
@@ -88,7 +88,7 @@ CASES = [
     {
         "name": "nohrsc_snow_analysis",
         "cmd": [
-            "python",
+            sys.executable,
             "nohrsc_snow_analysis.py",
             "--start-date",
             "2024-01-01",
@@ -102,7 +102,7 @@ CASES = [
     {
         "name": "satellite_fire_detections_goes",
         "cmd": [
-            "python",
+            sys.executable,
             "satellite_fire_detections_goes.py",
             "--start-date",
             "2024-01-01",
@@ -118,7 +118,7 @@ CASES = [
     {
         "name": "satellite_fire_detections_modis",
         "cmd": [
-            "python",
+            sys.executable,
             "satellite_fire_detections_modis.py",
             "--start-date",
             "2024-01-01",
@@ -132,7 +132,7 @@ CASES = [
     {
         "name": "satellite_fire_detections_viirs",
         "cmd": [
-            "python",
+            sys.executable,
             "satellite_fire_detections_viirs.py",
             "--start-date",
             "2024-01-01",
@@ -145,13 +145,13 @@ CASES = [
     },
     {
         "name": "smoke_analysis",
-        "cmd": ["python", "smoke_analysis.py", "--year", "2024", "--output-dir", str(OUT_ROOT / "smoke_analysis")],
+        "cmd": [sys.executable, "smoke_analysis.py", "--year", "2024", "--output-dir", str(OUT_ROOT / "smoke_analysis")],
         "timeout": 300,
     },
     {
         "name": "spot_forecast",
         "cmd": [
-            "python",
+            sys.executable,
             "spot_forecast.py",
             "--locations",
             "LOX",
@@ -164,18 +164,18 @@ CASES = [
     },
     {
         "name": "surface_fuels",
-        "cmd": ["python", "surface_fuels.py", "--version", "LF2024", "--output-dir", str(OUT_ROOT / "surface_fuels")],
+        "cmd": [sys.executable, "surface_fuels.py", "--version", "LF2024", "--output-dir", str(OUT_ROOT / "surface_fuels")],
         "timeout": 300,
     },
     {
         "name": "vegetation_type",
-        "cmd": ["python", "vegetation_type.py", "--version", "LF2024", "--output-dir", str(OUT_ROOT / "vegetation_type")],
+        "cmd": [sys.executable, "vegetation_type.py", "--version", "LF2024", "--output-dir", str(OUT_ROOT / "vegetation_type")],
         "timeout": 300,
     },
     {
         "name": "watches_and_warnings",
         "cmd": [
-            "python",
+            sys.executable,
             "watches_and_warnings.py",
             "--start-date",
             "2024-01-01",
@@ -189,7 +189,7 @@ CASES = [
     {
         "name": "weather_forecast",
         "cmd": [
-            "python",
+            sys.executable,
             "weather_forecast.py",
             "--start-date",
             "2024-01-01",
@@ -208,7 +208,7 @@ CASES = [
     },
     {
         "name": "wrc_housing_density",
-        "cmd": ["python", "wrc_housing_density.py", "--output-dir", str(OUT_ROOT / "wrc_housing_density")],
+        "cmd": [sys.executable, "wrc_housing_density.py", "--output-dir", str(OUT_ROOT / "wrc_housing_density")],
         "timeout": 300,
     },
 ]

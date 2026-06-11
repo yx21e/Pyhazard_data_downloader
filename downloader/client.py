@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 import json
 import subprocess
+import sys
 
 from downloader.catalog import DATASETS, DatasetSpec
 
@@ -23,7 +24,7 @@ class DownloadRequest:
             only to datasets with `aoi_mode="native"` or `aoi_mode="postfilter"`.
             (default: ``None``)
         output_root (str, optional): Root directory for downloaded outputs.
-            (default: ``"/home/yangshuang/output/downloader"``)
+            (default: ``"./downloads"``)
         extra_options (Dict[str, Dict[str, Any]] | None, optional): Per-dataset
             script options, for example
             ``{"nasa_gibs": {"layers": "MODIS_Terra_CorrectedReflectance_TrueColor"}}``.
@@ -41,7 +42,7 @@ class DownloadRequest:
         datasets: Sequence[str],
         temporal_window: Optional[Tuple[str, str]] = None,
         area_of_interest_bbox: Optional[Tuple[float, float, float, float]] = None,
-        output_root: str = "/home/yangshuang/output/downloader",
+        output_root: str = "./downloads",
         extra_options: Optional[Dict[str, Dict[str, Any]]] = None,
     ) -> None:
         self.datasets = datasets
@@ -72,7 +73,7 @@ def _bbox_to_area_string(bbox: Tuple[float, float, float, float]) -> str:
 
 
 def _build_command(root: Path, spec: DatasetSpec, request: DownloadRequest) -> tuple[List[str], List[str]]:
-    cmd = ["python", str(root / "scripts" / spec.script)]
+    cmd = [sys.executable, str(root / "scripts" / spec.script)]
     warnings: List[str] = []
     out_dir = Path(request.output_root) / spec.name
 

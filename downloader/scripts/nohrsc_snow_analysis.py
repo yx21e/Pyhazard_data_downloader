@@ -18,7 +18,7 @@ import requests
 # ===== USER SETTINGS =====
 START_DATE = os.environ.get("NOHRSC_START_DATE", "2024-01-01")
 END_DATE = os.environ.get("NOHRSC_END_DATE", "2024-12-31")
-OUTPUT_DIR = "/home/runyang/ryang/NOHRSC_SNODAS_masked_2024"
+OUTPUT_DIR = "./downloads/nohrsc_snow_analysis"
 BASE_URL = "https://noaadata.apps.nsidc.org/NOAA/G02158/masked"
 
 
