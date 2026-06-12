@@ -66,6 +66,10 @@ python3 -m downloader.provider_cli \
 See `downloader/PROVIDER_DATASETS.md` for source coverage, credential notes,
 and the boundary between raw downloads and model-ready dataloaders.
 
+For the current WildFIRE-FM checkpoint status, downloader role, and next
+foundation-model retraining pipeline, see
+`docs/wildfire_fm_downloader_handoff_20260612.md`.
+
 ## `DownloadRequest` Parameters
 
 - `datasets: list[str]`
