@@ -217,14 +217,9 @@ def _download_one(name: str, request: DownloadRequest) -> dict:
         warnings.extend(landfire_warnings)
         return _download_direct_rows(name, request, rows, {"version": version, "products": products}, warnings)
     if name == "wrc_housing":
-        url = opts.get("url")
-        if not url:
-            return _download_instruction_only(
-                name,
-                request,
-                "WRC housing download URLs can redirect or change. Use the provider page, or pass extra_options={'wrc_housing': {'url': '...'}}.",
-            )
-        return _download_direct_rows(name, request, [(str(url), Path(str(url)).name or "wrc_housing.zip")], {"url": url}, warnings)
+        url = opts.get("url") or "https://usfs-public.box.com/shared/static/g9v52r7m228jw3ue741hf9qa539vf738.zip"
+        warnings.append("Provider-hosted WRC URLs may change; pass extra_options={'wrc_housing': {'url': '...'}} if needed.")
+        return _download_direct_rows(name, request, [(str(url), "HUDen_CONUS.zip")], {"url": url}, warnings)
     if name == "landscan":
         return _download_instruction_only(
             name,

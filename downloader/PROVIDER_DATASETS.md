@@ -29,6 +29,21 @@ python3 -m downloader.provider_cli \
   --max-files 3
 ```
 
+Dry-run the FireWx-FM source set:
+
+```bash
+python3 -m downloader.provider_cli \
+  --datasets hrrr_fireseason firms_area landfire_static wrc_housing landscan \
+  --output-root ./downloads_firewx \
+  --start-year 2024 \
+  --end-year 2024 \
+  --start-date 2024-06-01 \
+  --end-date 2024-06-02 \
+  --bbox=-125,32,-114,42 \
+  --dry-run \
+  --max-files 4
+```
+
 Use a bounding box with FIRMS:
 
 ```bash
@@ -68,14 +83,20 @@ results = download_provider_data(request)
 - `hrrr_fireseason`: NOAA HRRR public S3 files for selected fire-season dates.
 - `wfigs_current`: current WFIGS perimeter snapshot through ArcGIS REST.
 - `landfire_static`: known LF2024 CONUS `FBFM40` and `CC` static products.
+- `wrc_housing`: WRC housing-unit density ZIP using a known provider URL, with URL override support.
 
 ## Credential or Terms-Limited Sources
 
 - `firms_area`: requires a NASA FIRMS `MAP_KEY`.
 - `merra2`: requires NASA Earthdata/GES DISC authenticated access.
 - `landscan`: governed by ORNL/LandScan provider-specific access terms.
-- `wrc_housing`: provider links can redirect/change; pass an explicit URL or use the provider portal.
 - `mtbs_perimeters`: records provider instructions before heavy chunked ArcGIS pulls.
+
+## FireWx-FM Coverage
+
+For the FireWx-FM-specific source matrix, including California HRRR, FIRMS,
+LANDFIRE, WRC housing, LandScan, WFIGS, MTBS, and broader hazard inventory
+coverage, see `downloader/FIREWX_FM_DATA_SOURCES.md`.
 
 ## Boundary
 

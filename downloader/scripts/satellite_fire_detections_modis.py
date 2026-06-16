@@ -8,7 +8,7 @@ from pathlib import Path
 
 import requests
 
-DEFAULT_MAP_KEY = os.environ.get('FIRMS_MAP_KEY', '64a36c46abb869a7c6a52f470bf0f6af')
+DEFAULT_MAP_KEY = os.environ.get('FIRMS_MAP_KEY')
 DEFAULT_AREA = os.environ.get('FIRMS_AREA', '-125,24,-66,50')
 BASE_URL = 'https://firms.modaps.eosdis.nasa.gov/api/area/csv'
 OUTPUT_DIR = Path(os.environ.get('FIRMS_OUTPUT_DIR', './downloads/firms'))
@@ -34,6 +34,8 @@ def main() -> int:
     parser.add_argument('--day-range', default=os.environ.get('FIRMS_DAY_RANGE', '1'))
     parser.add_argument('--output-dir', default=str(OUTPUT_DIR))
     args = parser.parse_args()
+    if not args.map_key:
+        raise SystemExit('FIRMS MAP_KEY is required. Set FIRMS_MAP_KEY or pass --map-key.')
 
     start = date.fromisoformat(args.start_date)
     end = date.fromisoformat(args.end_date)

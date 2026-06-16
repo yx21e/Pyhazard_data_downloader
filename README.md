@@ -63,10 +63,12 @@ python3 -m downloader.provider_cli \
   --max-files 3
 ```
 
-See `downloader/PROVIDER_DATASETS.md` for source coverage, credential notes,
-and the boundary between raw downloads and model-ready dataloaders.
+See `downloader/PROVIDER_DATASETS.md` for provider-catalog usage and
+`downloader/FIREWX_FM_DATA_SOURCES.md` for the FireWx-FM data-source coverage
+matrix, credential notes, and the boundary between raw downloads and
+model-ready dataloaders.
 
-For the current WildFIRE-FM checkpoint status, downloader role, and next
+For the current FireWx-FM checkpoint status, downloader role, and next
 foundation-model retraining pipeline, see
 `docs/wildfire_fm_downloader_handoff_20260612.md`.
 
@@ -141,3 +143,10 @@ foundation-model retraining pipeline, see
 ```bash
 pip install -r requirements.txt
 ```
+
+## Data Policy
+
+This repository does not redistribute raw provider data. It downloads public
+files where provider terms allow, writes instruction manifests for credentialed
+or terms-limited sources, and expects users to keep raw data and credentials
+outside git.

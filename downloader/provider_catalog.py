@@ -123,12 +123,13 @@ DATASETS: Dict[str, DatasetSpec] = {
     "wrc_housing": DatasetSpec(
         name="wrc_housing",
         family="static",
-        access="provider_direct",
+        access="public_or_provider_direct",
         time_mode="none",
-        notes="Wildfire Risk to Communities housing-unit density. Provider links may redirect; downloader records source instructions and optional URL override.",
+        notes="Wildfire Risk to Communities housing-unit density. Downloader includes a known provider-hosted ZIP URL and allows an explicit URL override if the provider link changes.",
         provider_urls=[
             "https://wildfirerisk.org/download/",
             "https://data-usfs.hub.arcgis.com/datasets/usfs::wildfire-risk-to-communities-housing-unit-density-image-service",
+            "https://usfs-public.box.com/shared/static/g9v52r7m228jw3ue741hf9qa539vf738.zip",
         ],
     ),
     "landscan": DatasetSpec(
