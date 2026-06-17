@@ -16,6 +16,37 @@ release project-specific cached tensors.
 | Housing exposure | Wildfire Risk to Communities housing-unit density | Static CONUS raster product | `wrc_housing` | Auto-download with provider URL; URL override supported |
 | Population exposure | LandScan | Static gridded population product | `landscan` | Instruction manifest; provider terms required |
 
+## Pretrained Input Channel Contract
+
+The released FireWx-FM checkpoints expect a fixed 16-channel tensor in
+`[channel, y, x]` order. Channel order is part of the checkpoint contract.
+The California 5 km, 12-hour-lead cache records the weather names
+`[t2m, d2m, u10, v10, cape, sp, blh, vis, prate, tp]` and the static names
+`[fuel_fbfm40, canopy_cover, housing_density, population]`.
+
+| Channel | Name | Dataset/source | Role |
+|---:|---|---|---|
+| 0 | `t2m` | NOAA HRRR | 2 m temperature |
+| 1 | `d2m` | NOAA HRRR | 2 m dew point |
+| 2 | `u10` | NOAA HRRR | 10 m east-west wind component |
+| 3 | `v10` | NOAA HRRR | 10 m north-south wind component |
+| 4 | `cape` | NOAA HRRR | Convective available potential energy |
+| 5 | `sp` | NOAA HRRR | Surface pressure |
+| 6 | `blh` | NOAA HRRR | Boundary-layer height |
+| 7 | `vis` | NOAA HRRR | Visibility |
+| 8 | `prate` | NOAA HRRR | Precipitation rate |
+| 9 | `tp` | NOAA HRRR | Accumulated precipitation |
+| 10 | `firewx_valid` | Cache validity channel | Dynamic/input validity mask for this regional cache |
+| 11 | `static_valid` | Static reprojection mask | Fraction of static layers valid at the grid cell |
+| 12 | `fuel_fbfm40` | LANDFIRE FBFM40 | Fire-behavior fuel model |
+| 13 | `canopy_cover` | LANDFIRE CC | Canopy cover |
+| 14 | `housing_density` | Wildfire Risk to Communities | Housing-unit density |
+| 15 | `population` | LandScan Global 2024 | Population exposure |
+
+NASA FIRMS detections are used to derive the occupancy target, not as an input
+channel. WFIGS and MTBS are event-level resources for supporting tasks and are
+not part of the 16-channel pretrained occupancy input.
+
 Example dry run for the core public/credentialed sources:
 
 ```bash
