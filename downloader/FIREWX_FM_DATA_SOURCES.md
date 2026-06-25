@@ -24,28 +24,50 @@ The California 5 km, 12-hour-lead cache records the weather names
 `[t2m, d2m, u10, v10, cape, sp, blh, vis, prate, tp]` and the static names
 `[fuel_fbfm40, canopy_cover, housing_density, population]`.
 
-| Channel | Name | Dataset/source | Role |
-|---:|---|---|---|
-| 0 | `t2m` | NOAA HRRR | 2 m temperature |
-| 1 | `d2m` | NOAA HRRR | 2 m dew point |
-| 2 | `u10` | NOAA HRRR | 10 m east-west wind component |
-| 3 | `v10` | NOAA HRRR | 10 m north-south wind component |
-| 4 | `cape` | NOAA HRRR | Convective available potential energy |
-| 5 | `sp` | NOAA HRRR | Surface pressure |
-| 6 | `blh` | NOAA HRRR | Boundary-layer height |
-| 7 | `vis` | NOAA HRRR | Visibility |
-| 8 | `prate` | NOAA HRRR | Precipitation rate |
-| 9 | `tp` | NOAA HRRR | Accumulated precipitation |
-| 10 | `firewx_valid` | Cache validity channel | Dynamic/input validity mask for this regional cache |
-| 11 | `static_valid` | Static reprojection mask | Fraction of static layers valid at the grid cell |
-| 12 | `fuel_fbfm40` | LANDFIRE FBFM40 | Fire-behavior fuel model |
-| 13 | `canopy_cover` | LANDFIRE CC | Canopy cover |
-| 14 | `housing_density` | Wildfire Risk to Communities | Housing-unit density |
-| 15 | `population` | LandScan Global 2024 | Population exposure |
+The released California checkpoints use native source units with no mean/std
+normalization, min/max scaling, or unit conversion. Invalid or missing values
+are zero-filled before inference. New retraining runs can enable normalization
+in the training config, but that does not change the released checkpoint
+contract.
+
+| Channel | Name | Dataset/source | Level or selection | Units | Role |
+|---:|---|---|---|---|---|
+| 0 | `t2m` | NOAA HRRR | 2 m above ground | K | 2 m temperature |
+| 1 | `d2m` | NOAA HRRR | 2 m above ground | K | 2 m dew point |
+| 2 | `u10` | NOAA HRRR | 10 m above ground | m/s | 10 m east-west wind component |
+| 3 | `v10` | NOAA HRRR | 10 m above ground | m/s | 10 m north-south wind component |
+| 4 | `cape` | NOAA HRRR | surface, instant | J/kg | Surface instantaneous CAPE |
+| 5 | `sp` | NOAA HRRR | surface, instant | Pa | Surface pressure |
+| 6 | `blh` | NOAA HRRR | surface diagnostic, instant | m | Boundary-layer height |
+| 7 | `vis` | NOAA HRRR | surface diagnostic, instant | m | Visibility |
+| 8 | `prate` | NOAA HRRR | surface, instant | kg m^-2 s^-1 | Precipitation rate |
+| 9 | `tp` | NOAA HRRR | surface, accumulated | kg m^-2 | Accumulated precipitation |
+| 10 | `firewx_valid` | Cache validity channel | input presence | binary mask | Cache-level dynamic input presence mask; 1.0 everywhere in this release |
+| 11 | `static_valid` | Static reprojection mask | static layers | fraction | Fraction of static layers valid at the grid cell |
+| 12 | `fuel_fbfm40` | LANDFIRE FBFM40 | static layer | categorical code | Fire-behavior fuel model |
+| 13 | `canopy_cover` | LANDFIRE CC | static layer | provider-native value | Canopy cover |
+| 14 | `housing_density` | Wildfire Risk to Communities | static layer | provider-native value | Housing-unit density |
+| 15 | `population` | LandScan Global 2024 | static layer | provider-native value | Population exposure |
 
 NASA FIRMS detections are used to derive the occupancy target, not as an input
 channel. WFIGS and MTBS are event-level resources for supporting tasks and are
 not part of the 16-channel pretrained occupancy input.
+
+The `cape` channel is the HRRR surface instantaneous CAPE field selected with
+`typeOfLevel=surface` and `stepType=instant`; it is not most-unstable CAPE or a
+layer CAPE variable.
+
+The two validity channels have different definitions. `firewx_valid` is a
+cache-level dynamic input presence mask; in the released California regional
+cache it is 1.0 everywhere and is not a per-variable HRRR missing-data mask.
+`static_valid` is the fraction of the four static layers valid after
+reprojection at each grid cell, with possible values 0.0, 0.25, 0.5, 0.75, and
+1.0.
+
+Static raster resampling into the FireWx-FM 5 km grid is model-preparation
+logic, not downloader logic. In the released cache builder, LANDFIRE FBFM40 and
+LANDFIRE canopy cover use nearest-neighbor resampling, while WRC housing density
+and LandScan population use bilinear resampling.
 
 Example dry run for the core public/credentialed sources:
 
@@ -64,6 +86,22 @@ python3 -m downloader.provider_cli \
 
 Set `FIRMS_MAP_KEY` before running a real FIRMS request. Keep downloaded raw
 provider files and credentials outside git.
+
+For custom HRRR date/hour/forecast-hour requests, use:
+
+```bash
+python3 downloader/scripts/hrrr_downloader.py \
+  --start-date 2024-06-01 \
+  --end-date 2024-06-02 \
+  --hours 00,06,12,18 \
+  --forecast-hours 00 \
+  --output-root ./downloads_hrrr \
+  --include-idx \
+  --dry-run
+```
+
+Remove `--dry-run` for real downloads. Use `--idx-only --max-files 1` for a
+small live smoke test.
 
 ## Event-Level and Supporting Wildfire Sources
 

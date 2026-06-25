@@ -59,6 +59,22 @@ python3 -m downloader.provider_cli \
 Pass the FIRMS key through `FIRMS_MAP_KEY` or through per-dataset
 `extra_options` in the Python API.
 
+Download native HRRR files for custom date/hour/forecast-hour requests:
+
+```bash
+python3 downloader/scripts/hrrr_downloader.py \
+  --start-date 2024-06-01 \
+  --end-date 2024-06-02 \
+  --hours 00,06,12,18 \
+  --forecast-hours 00 \
+  --output-root ./downloads_hrrr \
+  --include-idx \
+  --dry-run
+```
+
+This direct script writes `hrrr_download_manifest.json`. Remove `--dry-run` for
+real downloads, or use `--idx-only --max-files 1` for a small live smoke test.
+
 ## Python API
 
 ```python

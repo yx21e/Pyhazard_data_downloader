@@ -68,6 +68,23 @@ See `downloader/PROVIDER_DATASETS.md` for provider-catalog usage and
 matrix, credential notes, and the boundary between raw downloads and
 model-ready dataloaders.
 
+For custom HRRR date/hour/forecast-hour requests, use the direct HRRR public
+archive script:
+
+```bash
+python3 downloader/scripts/hrrr_downloader.py \
+  --start-date 2024-06-01 \
+  --end-date 2024-06-02 \
+  --hours 00,06,12,18 \
+  --forecast-hours 00 \
+  --output-root ./downloads_hrrr \
+  --include-idx \
+  --dry-run
+```
+
+Remove `--dry-run` to download native NOAA HRRR files. For a small live smoke
+test, use `--idx-only --max-files 1` to download only one index sidecar.
+
 For the current FireWx-FM checkpoint status, downloader role, and next
 foundation-model retraining pipeline, see
 `docs/wildfire_fm_downloader_handoff_20260612.md`.
